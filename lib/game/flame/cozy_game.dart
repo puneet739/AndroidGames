@@ -9,38 +9,45 @@ import 'package:cozy_tidy/game/flame/components/drop_zone_component.dart';
 class CozyTidyGame extends FlameGame {
   final LevelData levelData;
   final VoidCallback onWin;
+  final VoidCallback onSuccess; // Play pop sound on correct drop
   final VoidCallback onExampleFailure; // To play sound via Flutter wrapper if needed
   
   late SpriteSheet shapeSpriteSheet;
   
-  CozyTidyGame({required this.levelData, required this.onWin, required this.onExampleFailure});
+  CozyTidyGame({required this.levelData, required this.onWin, required this.onSuccess, required this.onExampleFailure});
 
   @override
   Color backgroundColor() => const Color(0xFFFFF3E0); // Level 2 BG Color hardcoded or from data
 
   @override
   Future<void> onLoad() async {
-    // Load the sprite sheet
-    // Assumes 3x3 grid as per user description
-    // Row 1: Sun, Wheel, TV
-    // Row 2: Mobile, Mobile
-    // Row 3: Circle, Rectangle
+    // Load the sprite sheet image (1024x1024 based on earlier script)
     final image = await images.load('shapes_spritesheet.png');
     
-    // We assume the sheet is square-ish or just check image size
-    // For 3x3, texture width/3, height/3
-    shapeSpriteSheet = SpriteSheet(
-      image: image,
-      srcSize: Vector2(image.width / 3, image.height / 3),
-    );
+    // EXACT COORDINATES from user (converted from CSS background-position)
+    // CSS: background-position: -X -Y means srcPosition: (X, Y)
+    
+    // Helper to create Sprite from pixel region
+    Sprite getSprite(double x, double y, double w, double h) {
+        return Sprite(image, srcPosition: Vector2(x, y), srcSize: Vector2(w, h));
+    }
+    
+    // --- DRAGGABLE ITEMS ---
+    // Sun: -23px -23px, 165x164
+    final sunSprite = getSprite(23, 23, 165, 164);
+    // Wheel: -205px -33px, 128x142
+    final wheelSprite = getSprite(205, 33, 128, 142);
+    // TV: -333px -22px, 157x159
+    final tvSprite = getSprite(333, 22, 157, 159);
+    // Mobile: -127px -190px, 77x104
+    final mobileSprite = getSprite(127, 190, 77, 104);
+    
+    // --- DROP ZONE TARGETS ---
+    // Circle: -19px -310px, 177x175
+    final circleTargetSprite = getSprite(19, 310, 177, 175);
+    // Rectangle: -209px -304px, 270x180
+    final rectTargetSprite = getSprite(209, 304, 270, 180);
 
-    // Setup Drop Zones
-    // Circle Target -> Row 3, Col 1 (Index 2, 0)
-    // Rect Target -> Row 3, Col 2 (Index 2, 1)
-    
-    final circleTargetSprite = shapeSpriteSheet.getSprite(2, 0);
-    final rectTargetSprite = shapeSpriteSheet.getSprite(2, 1);
-    
     double zoneY = size.y * 0.3;
     
     add(ShapeDropZone(
@@ -48,7 +55,7 @@ class CozyTidyGame extends FlameGame {
       acceptGroupId: 'circle',
       sprite: circleTargetSprite,
       position: Vector2(size.x * 0.3, zoneY),
-      size: Vector2(100, 100),
+      size: Vector2(120, 100),
     ));
 
     add(ShapeDropZone(
@@ -56,34 +63,29 @@ class CozyTidyGame extends FlameGame {
       acceptGroupId: 'rectangle',
       sprite: rectTargetSprite,
       position: Vector2(size.x * 0.7, zoneY),
-      size: Vector2(100, 100),
+      size: Vector2(140, 100),
     ));
     
-    // Setup Items
-    // Hardcoded mapping for Level 2 items to grid positions
-    // Sun: 0,0
-    // Wheel: 0,1
-    // TV: 0,2
-    // Mobile: 1,0 (or 1,1)
-    
-    _spawnItem('c1', 'circle', 0, 0, Vector2(size.x * 0.2, size.y * 0.7)); // Sun
-    _spawnItem('c2', 'circle', 0, 1, Vector2(size.x * 0.4, size.y * 0.7)); // Wheel
-    _spawnItem('r1', 'rectangle', 0, 2, Vector2(size.x * 0.6, size.y * 0.7)); // TV
-    _spawnItem('r2', 'rectangle', 1, 0, Vector2(size.x * 0.8, size.y * 0.7)); // Mobile
+    // Spawn Items
+    _spawnItem('c1', 'circle', sunSprite, Vector2(size.x * 0.15, size.y * 0.7)); // Sun
+    _spawnItem('c2', 'circle', wheelSprite, Vector2(size.x * 0.38, size.y * 0.7)); // Wheel
+    _spawnItem('r1', 'rectangle', tvSprite, Vector2(size.x * 0.62, size.y * 0.7)); // TV
+    _spawnItem('r2', 'rectangle', mobileSprite, Vector2(size.x * 0.85, size.y * 0.7)); // Mobile
   }
   
-  void _spawnItem(String id, String group, int row, int col, Vector2 pos) {
+  void _spawnItem(String id, String group, Sprite sprite, Vector2 pos) {
       add(DraggableShape(
           id: id,
           groupId: group,
-          sprite: shapeSpriteSheet.getSprite(row, col),
+          sprite: sprite,
           position: pos,
           size: Vector2(80, 80),
       ));
   }
   
   void onShapeSorted(DraggableShape shape) {
-      // Valid drop
+      // Valid drop - play success sound
+      onSuccess();
       shape.removeFromParent();
       
       // Check win condition

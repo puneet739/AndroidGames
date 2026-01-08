@@ -151,6 +151,9 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
                             onWin: () {
                                 _handleWin(); // Re-use existing Flutter win dialog
                             },
+                            onSuccess: () {
+                                _playSound('pop');
+                            },
                             onExampleFailure: () {
                                 _playSound('failure');
                             },

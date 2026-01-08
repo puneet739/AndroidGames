@@ -76,13 +76,15 @@ class MainMenuScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             
-            // Settings / Shop implementation placeholders
-            _buildMenuButton(
-              context: context,
-              label: 'SHOP',
-              color: const Color(0xFF8FD3FF), // Soft blue
-              iconPath: 'assets/images/skip_button.png',
-              onTap: () {},
+            // Developer Credits
+            SizedBox(height: 40.h),
+            Text(
+              'Developed by Mysha Behl and Riyan Behl',
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: const Color(0xFF9CA6B8),
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ],
         ),
