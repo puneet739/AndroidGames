@@ -7,6 +7,8 @@ import 'package:cozy_tidy/game/level_data.dart';
 import 'package:cozy_tidy/game/level_manager.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:cozy_tidy/utils/ad_helper.dart';
+import 'package:flame/game.dart'; // GameWidget
+import 'package:cozy_tidy/game/flame/cozy_game.dart'; // CozyTidyGame
 
 class SortingLevelScreen extends StatefulWidget {
   final LevelData levelData;
@@ -83,12 +85,7 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
         _handleWin();
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Oops! Doesn't go there!"),
-          duration: Duration(milliseconds: 500),
-        ),
-      );
+      _playSound('failure'); // Play failure sound
     }
   }
 
@@ -142,6 +139,50 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // HYBRID INTEGRATION: Use Flame for Level 2
+    if (widget.levelData.levelNumber == 2) {
+        return Scaffold(
+            body: Stack(
+                children: [
+                    // FLAME GAME
+                    GameWidget(
+                        game: CozyTidyGame(
+                            levelData: widget.levelData,
+                            onWin: () {
+                                _handleWin(); // Re-use existing Flutter win dialog
+                            },
+                            onExampleFailure: () {
+                                _playSound('failure');
+                            },
+                        ),
+                    ),
+                    
+                    // OVERLAY UI (Back Button)
+                    Positioned(
+                        top: 40.h,
+                        left: 20.w,
+                        child: IconButton(
+                            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.brown, size: 30),
+                            onPressed: () => Navigator.of(context).pop(),
+                        ),
+                    ),
+                    // INSTRUCTION TEXT
+                    Positioned(
+                        top: 60.h,
+                        left: 0, 
+                        right: 0,
+                        child: Center(
+                            child: Text(
+                                widget.levelData.instruction,
+                                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, color: Colors.brown),
+                            ),
+                        ),
+                    ),
+                ],
+            ),
+        );
+    }
+
     return Scaffold(
       backgroundColor: widget.levelData.backgroundColor,
       appBar: AppBar(
@@ -201,8 +242,11 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                                if (zone.icon != null)
+                                if (zone.assetPath != null)
+                                  Image.asset(zone.assetPath!, width: 50.sp, height: 50.sp, opacity: const AlwaysStoppedAnimation(0.5)) // Faded target
+                                else if (zone.icon != null)
                                     Icon(zone.icon, size: 40.sp, color: Colors.black26),
+
                                 if (zone.label.isNotEmpty)
                                     Text(zone.label, style: TextStyle(color: Colors.black45)),
                             ],
@@ -282,13 +326,17 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
   }
 
   Widget _buildItemVisual(GameItem item, {required double size, bool isFeedback = false}) {
+    Widget child = item.assetPath != null
+        ? Image.asset(item.assetPath!, width: size, height: size)
+        : Icon(item.icon, size: size, color: item.color);
+
     // If feedback (being dragged), make it a bit bigger or shadow
     if (isFeedback) {
         return Material( // Needs Material to draw shadow/elevation
             color: Colors.transparent,
-            child: Icon(item.icon, size: size * 1.2, color: item.color),
+            child: Transform.scale(scale: 1.2, child: child),
         );
     }
-    return Icon(item.icon, size: size, color: item.color);
+    return child;
   }
 }

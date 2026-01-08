@@ -27,22 +27,57 @@ final List<LevelData> gameLevels = [
     ],
   ),
 
-  // LEVEL 2: Shapes (Blocks)
+  // LEVEL 2: Shapes (Circle vs Rectangle)
   LevelData(
     levelNumber: 2,
     title: 'Shape Match',
-    instruction: 'Match the shapes!',
+    instruction: 'Sort by Shape!',
     backgroundColor: const Color(0xFFFFF3E0),
     items: [
-      GameItem(id: 'c1', groupId: 'circle', icon: Icons.circle, color: Colors.purple),
-      GameItem(id: 's1', groupId: 'square', icon: Icons.square, color: Colors.orange),
-      GameItem(id: 't1', groupId: 'star', icon: Icons.star, color: Colors.yellow),
-      GameItem(id: 'c2', groupId: 'circle', icon: Icons.circle, color: Colors.purple),
+      // CIRCLES
+      GameItem(
+        id: 'c1', 
+        groupId: 'circle', 
+        icon: Icons.wb_sunny, // Fallback
+        assetPath: 'assets/images/shape_sun.png',
+        color: Colors.transparent
+      ),
+      GameItem(
+        id: 'c2', 
+        groupId: 'circle', 
+        icon: Icons.local_shipping,
+        assetPath: 'assets/images/shape_wheel.png',
+        color: Colors.transparent
+      ),
+      // RECTANGLES
+      GameItem(
+        id: 'r1', 
+        groupId: 'rectangle', 
+        icon: Icons.tv,
+        assetPath: 'assets/images/shape_tv.png',
+        color: Colors.transparent
+      ),
+      GameItem(
+        id: 'r2', 
+        groupId: 'rectangle', 
+        icon: Icons.phone_android,
+        assetPath: 'assets/images/shape_mobile.png',
+        color: Colors.transparent
+      ),
     ],
     dropZones: [
-      DropZoneData(id: 'dz_circle', acceptGroupId: 'circle', icon: Icons.circle_outlined, label: ''),
-      DropZoneData(id: 'dz_square', acceptGroupId: 'square', icon: Icons.crop_square, label: ''),
-      DropZoneData(id: 'dz_star', acceptGroupId: 'star', icon: Icons.star_border, label: ''),
+      DropZoneData(
+        id: 'dz_circle', 
+        acceptGroupId: 'circle', 
+        label: 'Round',
+        assetPath: 'assets/images/target_circle.png'
+      ),
+      DropZoneData(
+        id: 'dz_rect', 
+        acceptGroupId: 'rectangle', 
+        label: 'Boxy',
+        assetPath: 'assets/images/target_rectangle.png'
+      ),
     ],
   ),
 

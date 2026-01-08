@@ -61,6 +61,21 @@ class MainMenuScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
 
+            // Levels Button
+            _buildMenuButton(
+              context: context,
+              label: 'LEVELS',
+              color: const Color(0xFFFFD54F), // Amber
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const LevelSelectorScreen(),
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: 20.h),
+            
             // Settings / Shop implementation placeholders
             _buildMenuButton(
               context: context,

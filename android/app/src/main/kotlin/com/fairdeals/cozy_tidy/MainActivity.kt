@@ -1,4 +1,4 @@
-package com.example.cozy_tidy
+package com.fairdeals.cozy_tidy
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,0 +1,24 @@
+Analyzing CozyTidy...
+
+  error - lib/game/flame/components/draggable_shape.dart:66:9 - Undefined name 'MoveEffect'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib/game/flame/components/draggable_shape.dart:68:11 - The method 'EffectController' isn't defined for the type 'DraggableShape'. Try correcting the name to the name of an existing method, or defining a method named 'EffectController'. - undefined_method
+  error - lib/game/flame/components/draggable_shape.dart:68:50 - Undefined name 'Curves'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+warning - lib/game/flame/components/draggable_shape.dart:11:8 - The value of the field '_isDragging' isn't used. Try removing the field, or using it. - unused_field
+warning - lib/screens/level_selector.dart:75:14 - The value of the local variable 'itemPos' isn't used. Try removing the variable or using it. - unused_local_variable
+   info - lib/game/flame/components/draggable_shape.dart:7:66 - 'HasGameRef' is deprecated and shouldn't be used. Use HasGameReference instead. This mixin will be removed in a future version of Flame. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - lib/game/flame/components/drop_zone_component.dart:17:8 - Unnecessary override. Try adding behavior in the overriding member or removing the override. - unnecessary_overrides
+   info - lib/game/flame/cozy_game.dart:2:8 - The import of 'package:flame/components.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flame/game.dart'. Try removing the import directive. - unnecessary_import
+   info - lib/screens/level_selector.dart:179:32 - Use a 'SizedBox' to add whitespace to a layout. Try using a 'SizedBox' rather than a 'Container'. - sized_box_for_whitespace
+   info - lib/screens/main_menu.dart:110:28 - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss. Try replacing the use of the deprecated member with the replacement. - deprecated_member_use
+   info - remove_bg.dart:2:8 - The imported package 'image' isn't a dependency of the importing package. Try adding a dependency for 'image' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+   info - remove_bg.dart:9:5 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - remove_bg.dart:16:7 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - remove_bg.dart:20:3 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - remove_bg.dart:36:3 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - slice_shapes.dart:2:8 - The imported package 'image' isn't a dependency of the importing package. Try adding a dependency for 'image' in the 'pubspec.yaml' file. - depend_on_referenced_packages
+   info - slice_shapes.dart:9:5 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - slice_shapes.dart:16:7 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - slice_shapes.dart:20:3 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - slice_shapes.dart:51:7 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+
+20 issues found.

@@ -30,6 +30,7 @@ class DropZoneData {
   final String acceptGroupId; // Accepts items with this groupId
   final Color? color;
   final IconData? icon;
+  final String? assetPath;
   final String label;
 
   const DropZoneData({
@@ -37,6 +38,7 @@ class DropZoneData {
     required this.acceptGroupId,
     this.color,
     this.icon,
+    this.assetPath,
     required this.label,
   });
 }
