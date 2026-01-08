@@ -108,8 +108,8 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
         actions: [
           TextButton(
             onPressed: () async {
-              // 1. Show Ad
-              if (_interstitialAd != null) {
+              // 1. Show Ad only every N levels
+              if (AdHelper.shouldShowAdAndIncrement() && _interstitialAd != null) {
                 _interstitialAd!.show();
                 _interstitialAd = null; 
               }

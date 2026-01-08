@@ -3,6 +3,26 @@ import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdHelper {
+  // --- AD FREQUENCY CONFIGURATION ---
+  /// Show interstitial ad every N levels. Change this value to adjust frequency.
+  static const int showAdEveryNLevels = 6;
+  
+  /// Internal counter for completed levels
+  static int _completedLevelsCount = 0;
+  
+  /// Call this after each level completion. Returns true if ad should be shown.
+  static bool shouldShowAdAndIncrement() {
+    _completedLevelsCount++;
+    if (_completedLevelsCount % showAdEveryNLevels == 0) {
+      return true;
+    }
+    return false;
+  }
+  
+  /// Reset counter (e.g., on app restart if needed)
+  static void resetLevelCounter() {
+    _completedLevelsCount = 0;
+  }
   // TEST AD IDs (Replace these with Real IDs before Publishing)
   
   static String get bannerAdUnitId {
