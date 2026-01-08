@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart'; // Removed to use local font
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class CozyTidyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            textTheme: GoogleFonts.fredokaTextTheme(), // Friendly, rounded font
+            fontFamily: 'Fredoka', // Global font family
             scaffoldBackgroundColor: const Color(0xFFF0F4F8), // Soft pastel background
             useMaterial3: true,
           ),

@@ -49,10 +49,26 @@ Players are presented with a messy pile of items and must drag and drop them int
     *   **Before Publishing**: You MUST replace these IDs with real AdMob Unit IDs.
 4.  Run `flutter run`.
 
-## 📦 Future Roadmap (To-Do)
+## � Build & Deployment (Android)
+To generate an Android App Bundle (`.aab`) for the Google Play Store:
+
+1.  **Update Version**: Increment the `version` in `pubspec.yaml` (e.g., `1.0.0+1` → `1.0.0+2`).
+2.  **Signing**: Ensure you have a release keystore and it is configured in `android/key.properties`. (See [Flutter Docs](https://docs.flutter.dev/deployment/android#signing-the-app) for help).
+3.  **Build Command**:
+    Run the following in your terminal:
+    ```bash
+    flutter build appbundle
+    ```
+4.  **Locate File**: The output file will be generated at:
+    `build/app/outputs/bundle/release/app-release.aab`
+
+## �📦 Future Roadmap (To-Do)
 *   [ ] Replace placeholder Icons with custom 2D Sprites.
 *   [ ] Add cute sound effects (Pop, Ding, Win).
 *   [ ] Add "Shop" to buy background themes with coins (Future IAP integration).
 
 ---
 *Built with ❤️ for a Cozy Gaming experience.*
+
+
+Puneet@123

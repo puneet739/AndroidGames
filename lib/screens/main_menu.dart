@@ -3,7 +3,7 @@ import 'package:cozy_tidy/game/level_manager.dart';
 import 'package:cozy_tidy/screens/sorting_level_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart'; 
 import 'package:cozy_tidy/screens/level_selector.dart';
 
 class MainMenuScreen extends StatelessWidget {
@@ -36,7 +36,7 @@ class MainMenuScreen extends StatelessWidget {
             // Title
             Text(
               'Cozy Tidy',
-              style: GoogleFonts.fredoka(
+              style: TextStyle(
                 fontSize: 48.sp,
                 fontWeight: FontWeight.bold,
                 color: const Color(0xFF6B4C83), // Cozy purple
@@ -45,7 +45,7 @@ class MainMenuScreen extends StatelessWidget {
             SizedBox(height: 10.h),
             Text(
               'Satisfying Organizing',
-              style: GoogleFonts.fredoka(
+              style: TextStyle(
                 fontSize: 20.sp,
                 color: const Color(0xFF9CA6B8),
               ),
@@ -111,7 +111,7 @@ class MainMenuScreen extends StatelessWidget {
             ],
             Text(
               label,
-              style: GoogleFonts.fredoka(
+              style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

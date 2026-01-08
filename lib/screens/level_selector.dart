@@ -11,7 +11,7 @@ class LevelSelectorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Level", style: GoogleFonts.fredoka(color: Colors.white)),
+        title: Text("Select Level", style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFFFF8FAB),
         centerTitle: true,
         elevation: 0,
@@ -50,7 +50,7 @@ class LevelSelectorScreen extends StatelessWidget {
                   children: [
                     Text(
                       "${level.levelNumber}",
-                      style: GoogleFonts.fredoka(
+                      style: TextStyle(
                         fontSize: 40.sp,
                         fontWeight: FontWeight.bold,
                         color: const Color(0xFFFF8FAB),
@@ -59,7 +59,7 @@ class LevelSelectorScreen extends StatelessWidget {
                     SizedBox(height: 5.h),
                     Text(
                       level.title,
-                      style: GoogleFonts.fredoka(fontSize: 16.sp, color: Colors.black54),
+                      style: TextStyle(fontSize: 16.sp, color: Colors.black54),
                       textAlign: TextAlign.center,
                     ),
                   ],

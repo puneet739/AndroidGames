@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:confetti/confetti.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cozy_tidy/game/level_data.dart';
@@ -99,13 +99,13 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text('Level Complete!', style: GoogleFonts.fredoka(), textAlign: TextAlign.center),
+        title: Text('Level Complete!', style: TextStyle(), textAlign: TextAlign.center),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(Icons.star, color: Colors.amber, size: 60),
             SizedBox(height: 10.h),
-            Text('Amazing Job!', style: GoogleFonts.fredoka(fontSize: 18.sp)),
+            Text('Amazing Job!', style: TextStyle(fontSize: 18.sp)),
           ],
         ),
         actions: [
@@ -133,7 +133,7 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
                 );
               }
             },
-            child: Text('Next Level', style: GoogleFonts.fredoka(fontSize: 20.sp)),
+            child: Text('Next Level', style: TextStyle(fontSize: 20.sp)),
           ),
         ],
       ),
@@ -145,7 +145,7 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
     return Scaffold(
       backgroundColor: widget.levelData.backgroundColor,
       appBar: AppBar(
-        title: Text(widget.levelData.title, style: GoogleFonts.fredoka()),
+        title: Text(widget.levelData.title, style: TextStyle()),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
@@ -171,7 +171,7 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
                 padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: Text(
                   widget.levelData.instruction,
-                  style: GoogleFonts.fredoka(fontSize: 22.sp, color: Colors.black54),
+                  style: TextStyle(fontSize: 22.sp, color: Colors.black54),
                 ),
               ),
 
@@ -204,7 +204,7 @@ class _SortingLevelScreenState extends State<SortingLevelScreen> {
                                 if (zone.icon != null)
                                     Icon(zone.icon, size: 40.sp, color: Colors.black26),
                                 if (zone.label.isNotEmpty)
-                                    Text(zone.label, style: GoogleFonts.fredoka(color: Colors.black45)),
+                                    Text(zone.label, style: TextStyle(color: Colors.black45)),
                             ],
                           ),
                         );

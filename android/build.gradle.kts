@@ -1,8 +1,17 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
+}
+
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
 val newBuildDir: Directory =
